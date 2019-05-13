@@ -1,9 +1,9 @@
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackQueryHandler
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 
-import Prediction
-import Home
-import Car
+# import Prediction
+# import Home
+# import Car
 
 
 ############### Data Base Part #########################
@@ -53,7 +53,7 @@ dispatcher.add_handler(choose_handler)
 def button(bot, update):
     query = update.callback_query
 
-    bot.edit_message_text(chat_id=query.message.chat_id, text="خب ! بریم برای پیش بینی قیمت {}".format(query.data),message_id=query.message.message_id)
+    bot.edit_message_text(chat_id=query.message.chat_id, text="خب ! بریم برای پیش بینی قیمت {}".format(query.data), message_id=query.message.message_id)
 
 button_handler = CallbackQueryHandler(button)
 dispatcher.add_handler(button_handler)
@@ -61,7 +61,7 @@ dispatcher.add_handler(button_handler)
 
 #car handler
 def car(bot, update):
-    bot.send_message(chat_id=update.message.chat_id, text="پیش بینی قیمت خودرو")
+    bot.send_message(chat_id=update.message.chat_id, text="لطفا نام شهر خود را به فارسی وارد کنید")
 car_handler = CommandHandler("car", car)
 dispatcher.add_handler(car_handler)
 
@@ -70,8 +70,12 @@ dispatcher.add_handler(car_handler)
 
 #Home Handler
 def home(bot, update):
-    bot.send_message(chat_id=update.message.chat_id, text="پیش بینی قیمت خانه")
+    bot.send_message(chat_id=update.message.chat_id, text="لطفا نام شهر خود را به فارسی وارد کنید")
+    global city_name
+    city_name = update.message.text
+    update.message.reply(chat_id=update.message.chat_id, text=city_name)
 home_handler = CommandHandler("home", home)
+
 dispatcher.add_handler(home_handler)
 
 
@@ -81,3 +85,4 @@ dispatcher.add_handler(home_handler)
 
 updater.start_polling()
 
+#TODO:complete the bot interface
