@@ -15,12 +15,20 @@ def HOME_DB_creating():
 
 def HOME_DB_table_creating():
     my_cursor.execute("USE HOME;")
-    my_cursor.execute("CREATE TABLE home_info (ID INTEGER AUTO_INCREAMENT PRIMARY KEY , year INTEGER(5), );")
+    my_cursor.execute("CREATE TABLE home_info (ID INTEGER AUTO_INCREAMENT PRIMARY KEY ,"
+                      "location VARCHAR(50),"
+                      "building_age VARCHAR(50), "
+                      "rooms VARCHAR(50), "
+                      "meterinx VARCHAR(50), price VARCHAR(50));")
 
 def CAR_DB_creating():
     my_cursor.execute("CREATE DATABASE CAR;")
 def CAR_DB_table_creating():
-    my_cursor.execute("CREATE TABLE home_info (ID INTEGER AUTO_INCREAMENT PRIMARY KEY , );")
+    my_cursor.execute("CREATE TABLE home_info (ID INTEGER AUTO_INCREAMENT PRIMARY KEY ,"
+                      "model VARCHAR(50),"
+                      "clor VARCHAR(50), "
+                      "karkard VARCHAR(50),"
+                      "price VARCHAR(50));")
 dbconnector.commit()
 my_cursor.close()
 dbconnector.close()
