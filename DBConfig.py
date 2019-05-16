@@ -11,11 +11,11 @@ my_cursor = dbconnector.cursor()
 ############## building HOME data base ##################################
 
 def HOME_DB_creating():
-    my_cursor.execute("CREATE DATABASE HOME;")
+    my_cursor.execute("CREATE DATABASE IF NO EXISTS HOME;")
 
 def HOME_DB_table_creating():
     my_cursor.execute("USE HOME;")
-    my_cursor.execute("CREATE TABLE home_info (ID INTEGER AUTO_INCREAMENT PRIMARY KEY ,"
+    my_cursor.execute("CREATE TABLE IF NOT EXISTS home_info (ID INTEGER AUTO_INCREAMENT PRIMARY KEY ,"
                       "location VARCHAR(50),"
                       "building_age VARCHAR(50), "
                       "rooms VARCHAR(50), "
@@ -24,7 +24,7 @@ def HOME_DB_table_creating():
 def CAR_DB_creating():
     my_cursor.execute("CREATE DATABASE CAR;")
 def CAR_DB_table_creating():
-    my_cursor.execute("CREATE TABLE home_info (ID INTEGER AUTO_INCREAMENT PRIMARY KEY ,"
+    my_cursor.execute("CREATE TABLE IF NOT EXISTS home_info (ID INTEGER AUTO_INCREAMENT PRIMARY KEY ,"
                       "model VARCHAR(50),"
                       "clor VARCHAR(50), "
                       "karkard VARCHAR(50),"
