@@ -14,7 +14,7 @@ dbconnector = mysql.connector.connect(host="127.0.0.1",
                                       )
 my_cursor = dbconnector.cursor()
 ########### Connecting to site ############
-for page in range(100):
+for page in range(2994):
     url = "https://bama.ir/car/all-brands/all-models/all-trims?page=%d" % (page)
     response = requests.get(url)
     soup = bs4.BeautifulSoup(response.content, 'html.parser')

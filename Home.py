@@ -15,8 +15,8 @@ dbconnector = mysql.connector.connect(host="127.0.0.1",
                                       )
 my_cursor = dbconnector.cursor()
 ############### Connecting to site ###################
-for page in range(100):
-    url = "https://www.ihome.ir/%D8%AE%D8%B1%DB%8C%D8%AF-%D9%81%D8%B1%D9%88%D8%B4/%D8%A7%D9%85%D9%84%D8%A7%DA%A9/%D8%A7%DB%8C%D8%B1%D8%A7%D9%86/%d/" % (page)
+for page in range(50049):
+    url = "https://www.ihome.ir/%D8%AE%D8%B1%DB%8C%D8%AF-%D9%81%D8%B1%D9%88%D8%B4/%D8%A7%D9%85%D9%84%D8%A7%DA%A9/%D8%A7%DB%8C%D8%B1%D8%A7%D9%86/%d/" % page
     response = requests.get(url)
     soup = bs4.BeautifulSoup(response.content, 'html.parser')
     location     = soup.find('div', attrs={'class':'location'}).text.strip()
