@@ -14,16 +14,26 @@ dbconnector = mysql.connector.connect(host="127.0.0.1",
                                       )
 my_cursor = dbconnector.cursor()
 ########### Connecting to site ############
-for page in range(2994):
-    url = "https://bama.ir/car/all-brands/all-models/all-trims?page=%d" % (page)
+for page in range(291):
+    url = "https://takhtegaz.com/car/sale?page=%i" % page
     response = requests.get(url)
     soup = bs4.BeautifulSoup(response.content, 'html.parser')
-    model   = soup.find('h2', attrs={"itemprop": "name"}).text.strip()
-    color   = soup.find('span', attrs={"id":"ex-color"}).text.strip()
-    karkard = soup.find('p',attrs={"class":"price hidden-xs"}).text.strip()
-    price = soup.find('span',attrs={"itemprop":"price"}).text.strip()
 ########### insert to DB #################
-    my_cursor.execute('INSERT INTO car_info VALUES (\'%s\', \'%s\', \'%s\', \'%s\');' % (model, color, karkard, price))
+    for m in  soup.find_all('h3', attrs={"class":"card-main__title"}):
+        temp = m.get_text().strip()
+        year = temp[0:5]
+        my_cursor.execute('INSERT INTO car_info(year_car) VALUES(\'%s\');') % year
+        model = temp[5:len(temp)-11]
+        my_cursor.execute("INSERT INTO car_info(model) VALUES(\'%s\');") % model
+    for kc in soup.find_all('ul', attrs={"class":"specs hidden-md-down clearfix"}):
+        templs = kc.get_text().strip().split()
+        karkard  = templs[0]
+        my_cursor.execute("INSERT INTO car_info(karkard) VALUES(\'%s\');") % karkard
+        color = templs[3]
+        my_cursor.execute("INSERT INTO car_info(color) VALUES(\'%s\');") % color
+    for p in soup.find_all('div', attrs={"class":"card__price money-format"}):
+        price = p.get_text().strip(" تومان")
+        my_cursor.execute("INSERT INTO car_info(price) VALUES(\'%s\');") % price
 
 dbconnector.commit()
 dbconnector.close()
