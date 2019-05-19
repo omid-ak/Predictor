@@ -62,6 +62,8 @@ dispatcher.add_handler(button_handler)
 #car handler
 def car(bot, update):
     bot.send_message(chat_id=update.message.chat_id, text="لطفا نام شهر خود را به فارسی وارد کنید")
+    #TODO: Enter details of car
+
 car_handler = CommandHandler("car", car)
 dispatcher.add_handler(car_handler)
 
@@ -74,6 +76,7 @@ def home(bot, update):
     global city_name
     city_name = update.message.text
     update.message.reply(chat_id=update.message.chat_id, text=city_name)
+    #TODO: Enter details of home
 home_handler = CommandHandler("home", home)
 
 dispatcher.add_handler(home_handler)
