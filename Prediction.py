@@ -1,12 +1,12 @@
 import mysql.connector
 import requests
 import bs4
-
+from sklearn import tree
 
 
 ############# car Prediction ########################
 
-def car_predicting():
+def car_predicting(model, color, year_car,karkerd):
     dbconnector_C = mysql.connector.connect(host="127.0.0.1",
                                           user="root",
                                           password="@Omid1377",
@@ -16,7 +16,8 @@ def car_predicting():
     my_cursor_C = dbconnector_C.cursor()
 
     #TODO: predict cars
-
+    X = []
+    Y = [] #price of car
 
 
     dbconnector_C.commit()
@@ -26,12 +27,15 @@ def car_predicting():
 
 
 ############ Home Prediction ########################
-def home_predicting():
+def home_predicting(location, building_age, rooms, meterix):
     dbconnector_H = mysql.connector.connect(host="127.0.0.1",
                                           user="root",
                                           password="@Omid1377",
                                           database="HOME"
                                           )
+
+    X = [location, building_age, rooms, meterix]
+    Y = []#price of home
 
     my_cursor_H = dbconnector_H.cursor()
 
