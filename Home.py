@@ -19,14 +19,18 @@ for page in range(50049):
     url = "https://www.ihome.ir/%D8%AE%D8%B1%DB%8C%D8%AF-%D9%81%D8%B1%D9%88%D8%B4/%D8%A7%D9%85%D9%84%D8%A7%DA%A9/%D8%A7%DB%8C%D8%B1%D8%A7%D9%86/%d/" % page
     response = requests.get(url)
     soup = bs4.BeautifulSoup(response.content, 'html.parser')
-    location     = soup.find('div', attrs={'class':'location'}).text.strip()
-    building_age = soup.find('i', attrs={'class':'ihome-building-age'}).text.strip()
-    rooms        = soup.find('i', attrs={'class':'ihome-bed'}).text.strip()
-    meterix      = soup.find('i',attrs={'class':'ihome-arrows'}).text.strip()
-    price        = soup.find('div', attrs={'class':'price','data-cur-area':'Sq. M.'}).text.strip()
-
 ############### insert datas to DB ###################
-    my_cursor.execute("INSERT INTO home_info VALUES (\'%s\', \'%s\', \'%s\', \'%s\', \'%s\');") % (location, building_age, rooms, meterix, price)
+    for l in soup.find_all('div', attrs={'class':'location'}):
+        location = l.get_text().strip()
+        my_cursor.execute("INSERT INTO home_info(location) VALUES (\'%s'\);") % location
+    for rome in soup.find_all('ul', attrs={"class":"left slider_pinfo"}):
+        templs = rome.get_text().strip().split()
+        rooms = rome[0]
+        meterix = rome[2]
+        my_cursor.execute("INSERT INTO home_info(rooms,meterix) VALUES (\'%s\',\'%s\');") % (rooms, meterix)
+    for p in soup.find_all('div', attrs={'class':'price','data-cur-area':'Sq. M.'}):
+        price = p.get_text().strip().strip('تومان')
+        my_cursor.execute("INSERT INTO home_info(price) VALUES (\'%s\');") % price
 
 dbconnector.commit()
 dbconnector.close()
