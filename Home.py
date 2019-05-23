@@ -22,15 +22,13 @@ for page in range(50049):
 ############### insert datas to DB ###################
     for l in soup.find_all('div', attrs={'class':'location'}):
         location = l.get_text().strip()
-        my_cursor.execute("INSERT INTO home_info(location) VALUES (\'%s'\);") % location
-    for rome in soup.find_all('ul', attrs={"class":"left slider_pinfo"}):
-        templs = rome.get_text().strip().split()
-        rooms = rome[0]
-        meterix = rome[2]
-        my_cursor.execute("INSERT INTO home_info(rooms,meterix) VALUES (\'%s\',\'%s\');") % (rooms, meterix)
-    for p in soup.find_all('div', attrs={'class':'price','data-cur-area':'Sq. M.'}):
-        price = p.get_text().strip().strip('تومان')
-        my_cursor.execute("INSERT INTO home_info(price) VALUES (\'%s\');") % price
+        for rome in soup.find_all('ul', attrs={"class":"left slider_pinfo"}):
+            templs = rome.get_text().strip().split()
+            rooms = rome[0]
+            meterix = rome[2]
+            for p in soup.find_all('div', attrs={'class':'price','data-cur-area':'Sq. M.'}):
+                price = p.get_text().strip().strip('تومان')
+                my_cursor.execute("INSERT INTO home_info(price) VALUES (\'%s\', \'%s\', \'%s\', \'%s\');" % (location, rooms, meterix, price))
 
 dbconnector.commit()
 dbconnector.close()
