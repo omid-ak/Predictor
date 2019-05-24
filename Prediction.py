@@ -1,6 +1,4 @@
 import mysql.connector
-import requests
-import bs4
 from sklearn import tree
 
 
@@ -10,7 +8,8 @@ def car_predicting(model, color, year_car,karkerd):
     dbconnector_C = mysql.connector.connect(host="127.0.0.1",
                                           user="root",
                                           password="@Omid1377",
-                                          database="CAR"
+                                          database="H_C",
+                                          table="car_info"
                                           )
 
     my_cursor_C = dbconnector_C.cursor()
@@ -31,7 +30,8 @@ def home_predicting(location, building_age, rooms, meterix):
     dbconnector_H = mysql.connector.connect(host="127.0.0.1",
                                           user="root",
                                           password="@Omid1377",
-                                          database="HOME"
+                                          database="H_C",
+                                          table="home_info"
                                           )
 
     X = [location, building_age, rooms, meterix]
