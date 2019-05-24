@@ -3,14 +3,15 @@ import requests
 import bs4
 ########### creating DB and table #########
 import DBConfig
-DBConfig.CAR_DB_creating()
-DBConfig.CAR_DB_table_creating()
+DBConfig.HOME_CAR_creating()
+DBConfig.CAR_table_creating()
 
 ############ Connecting to DB #############
 dbconnector = mysql.connector.connect(host="127.0.0.1",
                                       user="root",
                                       password="@Omid1377",
-                                      database="CAR"
+                                      database="H_C",
+                                      table="car_info"
                                       )
 my_cursor = dbconnector.cursor()
 ########### Connecting to site ############

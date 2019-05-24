@@ -3,15 +3,16 @@ import requests
 import bs4
 ############ creating DB and table ###################
 import DBConfig
-DBConfig.HOME_DB_creating()
-DBConfig.HOME_DB_table_creating()
+DBConfig.HOME_CAR_creating()
+DBConfig.HOME_table_creating()
 
 ############### Connecting to DB #####################
 
 dbconnector = mysql.connector.connect(host="127.0.0.1",
                                       user="root",
                                       password="@Omid1377",
-                                      database="HOME"
+                                      database="H_C",
+                                      table="home_info"
                                       )
 my_cursor = dbconnector.cursor()
 ############### Connecting to site ###################
