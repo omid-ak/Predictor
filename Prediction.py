@@ -1,10 +1,12 @@
 import mysql.connector
 from sklearn import tree
-
-
+import Home
+import Car
 ############# car Prediction ########################
 
 def car_predicting(model, year_car, color,karkerd):
+
+    Car.CAR_data_fetching()
     dbconnector_C = mysql.connector.connect(host="127.0.0.1",
                                           user="root",
                                           password="@Omid1377",
@@ -33,11 +35,14 @@ def car_predicting(model, year_car, color,karkerd):
     answer1 = carpred.predict(person1)
     dbconnector_C.commit()
     dbconnector_C.close()
+
     my_cursor_C.close()
     return answer1
 
 ############ Home Prediction ########################
 def home_predicting(location, rooms, meterix):
+
+    Home.Home_data_fetching()
     dbconnector_H = mysql.connector.connect(host="127.0.0.1",
                                           user="root",
                                           password="@Omid1377",
@@ -46,17 +51,17 @@ def home_predicting(location, rooms, meterix):
                                           )
     my_cursor_H = dbconnector_H.cursor()
 
-    X2 = [location, building_age, rooms, meterix]
+    X2 = [location, rooms, meterix]
     Y2 = []#price of home
 
     my_cursor_H.execute("SELECT location, rooms, meterix FROM home_info;")
     res3 = my_cursor_H.fetchall()
     for row3 in res3:
-    	X2.append(row3)
+        X2.append(row3)
     my_cursor_H.execute("SELECT price FROM home_info;")
     res4 = my_cursor_H.fetchall()
-    for row4 in res43:
-    	Y2.append(row4)
+    for row4 in res4:
+        Y2.append(row4)
     person2 = [[location, rooms, meterix]]
     hompred = tree.DecisionTreeClassifier()
     hompred = hompred.fit(X2, Y2)
