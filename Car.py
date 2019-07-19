@@ -2,16 +2,17 @@ import mysql.connector
 import requests
 import bs4
 import DBConfig
+from DBConfig import mysq_useranem
+from DBConfig import mysql_password
 ########### creating DB and table #########
-
 def CAR_data_fetching():
     DBConfig.HOME_CAR_creating()
     DBConfig.CAR_table_creating()
 
     ############ Connecting to DB #############
     dbconnector = mysql.connector.connect(host="127.0.0.1",
-                                          user="root",
-                                          password="@Omid1377",
+                                          user="%s" % mysq_useranem,
+                                          password="%s" % mysql_password,
                                           database="H_C",
                                           table="car_info"
                                           )

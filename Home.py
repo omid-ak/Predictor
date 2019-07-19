@@ -2,6 +2,8 @@ import mysql.connector
 import requests
 import bs4
 import DBConfig
+from DBConfig import mysq_useranem
+from DBConfig import mysql_password
 ############ creating DB and table ###################
 
 def Home_data_fetching():
@@ -12,8 +14,8 @@ def Home_data_fetching():
 
 
     dbconnector = mysql.connector.connect(host="127.0.0.1",
-                                          user="root",
-                                          password="@Omid1377",
+                                          user="%s" % mysq_useranem,
+                                          password="%s" % mysql_password,
                                           database="H_C",
                                           table="home_info"
                                           )

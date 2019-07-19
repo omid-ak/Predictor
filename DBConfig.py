@@ -1,9 +1,12 @@
 import mysql.connector
 ########### Connecting to DB #########################
+mysq_useranem = input('Enter mysql username : ')
+mysql_password = input('Enter mysql password : ')
+
 global dbconnector
 dbconnector = mysql.connector.connect(host="127.0.0.1",
-                                          user="root",
-                                          password="@Omid1377",
+                                          user="%s" % mysq_useranem,
+                                          password="%s" % mysql_password,
                                           )
 global my_cursor
 my_cursor = dbconnector.cursor()

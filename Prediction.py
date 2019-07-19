@@ -2,14 +2,16 @@ import mysql.connector
 from sklearn import tree
 import Home
 import Car
+from DBConfig import mysq_useranem
+from DBConfig import mysql_password
 ############# car Prediction ########################
 
 def car_predicting(model, year_car, color,karkerd):
 
     Car.CAR_data_fetching()
     dbconnector_C = mysql.connector.connect(host="127.0.0.1",
-                                          user="root",
-                                          password="@Omid1377",
+                                          user="%s" % mysq_useranem,
+                                          password="%s" % mysql_password,
                                           database="H_C",
                                           table="car_info"
                                           )
