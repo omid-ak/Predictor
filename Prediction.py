@@ -46,8 +46,8 @@ def home_predicting(location, rooms, meterix):
 
     Home.Home_data_fetching()
     dbconnector_H = mysql.connector.connect(host="127.0.0.1",
-                                          user="root",
-                                          password="@Omid1377",
+                                          user="%s" % mysq_useranem,
+                                          password="%s" % mysql_password,
                                           database="H_C",
                                           table="home_info"
                                           )
