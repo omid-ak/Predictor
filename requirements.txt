@@ -15,7 +15,7 @@ mccabe==0.6.1
 mysql-connector==2.2.9
 mysql-connector-python==8.0.16
 numpy==1.16.3
-protobuf==3.7.1
+protobuf==3.15.0
 pycparser==2.19
 pylint==2.3.1
 python-telegram-bot==11.1.0
